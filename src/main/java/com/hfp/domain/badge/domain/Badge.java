@@ -1,4 +1,28 @@
 package com.hfp.domain.badge.domain;
 
-public class Badge {
+import com.hfp.domain.common.BaseEntity;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@Entity
+@Table(name = "Badge")
+public class Badge extends BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long badge_id;
+
+    @Column
+    private String name;
+
+    @Column
+    private String image_url;
+
+    public Badge(String name, String image_url){
+        this.name = name;
+        this.image_url = image_url;
+    }
+
 }
