@@ -8,6 +8,8 @@ import com.hfp.domain.support.domain.dto.PostSupportRes;
 import com.hfp.domain.support.domain.repository.SupportRepository;
 import com.hfp.domain.user.domain.User;
 import com.hfp.domain.user.domain.repository.UserRepository;
+import com.hfp.global.error.DefaultException;
+import com.hfp.global.payload.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +31,13 @@ public class SupportService {
         LocalDate support_date = postSupportReq.getSupport_date();
 
         Animal animal = animalRepository.findById(animal_id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid animal ID"));
+                .orElseThrow(() -> new DefaultException(ErrorCode.INVALID_CHECK));
 
         User sponsorUser = userRepository.findById(sponsor_id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid sponsor ID"));
+                .orElseThrow(() -> new DefaultException(ErrorCode.INVALID_CHECK));
 
         User rescueUser = userRepository.findById(rescue_id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid rescue ID"));
+                .orElseThrow(() -> new DefaultException(ErrorCode.INVALID_CHECK));
 
         Support support = Support.builder()
                 .supportAnimal(animal)
