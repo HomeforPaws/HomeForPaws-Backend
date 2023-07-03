@@ -19,12 +19,12 @@ public class ProofService {
 
     public ProofResponseDto getProof(Long animal_id) {
 
-        Proof proof = proofRepository.findProofById(animal_id).orElseThrow(
-                () -> new IllegalArgumentException("해당하는 후원 증빙 정보를 찾을 수 없습니다.")
-        );
-
         Animal supported_animal = animalRepository.findById(animal_id).orElseThrow(
                 () -> new IllegalArgumentException("해당하는 동물 정보를 찾을 수 없습니다.")
+        );
+
+        Proof proof = proofRepository.findBySupportedAnimal(supported_animal).orElseThrow(
+                () -> new IllegalArgumentException("해당하는 후원 증빙 정보를 찾을 수 없습니다.")
         );
 
         return ProofResponseDto.builder()
