@@ -14,10 +14,10 @@ public class Badge extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long badge_id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @Column
+    @Column(nullable = false)
     private String image_url;
 
     public Badge(String name, String image_url){
