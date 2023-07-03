@@ -4,6 +4,7 @@ import com.hfp.domain.animal.domain.Animal;
 import com.hfp.domain.common.BaseEntity;
 import com.hfp.domain.user.domain.User;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -35,4 +36,13 @@ public class Support extends BaseEntity {
 
     @Column(nullable = false)
     private LocalDate support_date;
+
+    @Builder
+    public Support(Animal supportAnimal, User sponsorUser, User rescueUser, Integer money, LocalDate support_date) {
+        this.supportAnimal = supportAnimal;
+        this.sponsorUser = sponsorUser;
+        this.rescueUser = rescueUser;
+        this.money = money;
+        this.support_date = support_date;
+    }
 }
