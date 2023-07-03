@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SupportRepository extends JpaRepository<Support, Long> {
 
-    List<Support> findSupportBySponsorUser(User sponsorUser);
+    List<Support> findSupportBySponsorUser(Users sponsorUser);
 
     List<Support> findAllById(Long sponsor_id);
 }
