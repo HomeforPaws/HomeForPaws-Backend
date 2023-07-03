@@ -20,8 +20,7 @@ import lombok.Getter;
 @Getter
 public class Users extends BaseEntity {
 
-    @Id
-    @Column(name = "users_id")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Badge extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long badge_id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
