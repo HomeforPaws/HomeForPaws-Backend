@@ -1,13 +1,7 @@
 package com.hfp.domain.user.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
+import jakarta.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hfp.domain.common.BaseEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -16,9 +10,10 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Entity
+@Table(name = "Users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Users extends BaseEntity {
+public class User extends BaseEntity {
 
     @Id
     @Column(name = "users_id")
@@ -31,7 +26,7 @@ public class Users extends BaseEntity {
 
 
     @Builder
-    public Users(String name, String nickname, String phone, String email){
+    public User(String name, String nickname, String phone, String email){
         this.name = name;
         this.nickname = nickname;
         this.phone = phone;
