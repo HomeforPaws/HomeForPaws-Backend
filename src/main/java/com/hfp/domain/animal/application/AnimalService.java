@@ -5,7 +5,7 @@ import com.hfp.domain.animal.domain.Species;
 import com.hfp.domain.animal.domain.repository.AnimalRepository;
 import com.hfp.domain.animal.dto.GetAnimalRes;
 import com.hfp.domain.animal.dto.PostAnimalReq;
-import com.hfp.domain.user.domain.User;
+import com.hfp.domain.user.domain.Users;
 import com.hfp.domain.user.domain.repository.UserRepository;
 import com.hfp.global.error.DefaultException;
 import com.hfp.global.infrastructure.S3Uploader;
@@ -104,11 +104,11 @@ public class AnimalService {
     @Transactional
     public ResponseEntity<?> postAnimal(PostAnimalReq postAnimalReq, MultipartFile image) throws IOException {
 
-        User user = userRepository.findById(postAnimalReq.getRescue_id())
+        Users user = userRepository.findById(postAnimalReq.getRescue_id())
                 .orElseThrow(() -> new DefaultException(ErrorCode.INVALID_CHECK));
 
         Animal animal = Animal.builder()
-                .rescueUser(user)
+                .rescueUsers(user)
                 .name(postAnimalReq.getName())
                 .species(postAnimalReq.getSpecies())
                 .gender(postAnimalReq.getGender())
