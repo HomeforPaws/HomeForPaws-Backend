@@ -85,7 +85,8 @@ public class AnimalService {
                         .image_url(animal.getImage_url())
                         .place(animal.getPlace())
                         .age(animal.getAge())
-                        .description(animal.getDescription()))
+                        .description(animal.getDescription())
+                        .build())
                 .build();
 
         return ResponseEntity.ok(apiResponse);
