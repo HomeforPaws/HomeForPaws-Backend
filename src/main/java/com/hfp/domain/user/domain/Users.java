@@ -13,7 +13,7 @@ import lombok.Getter;
 @Table(name = "Users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class User extends BaseEntity {
+public class Users extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +25,7 @@ public class User extends BaseEntity {
 
 
     @Builder
-    public User(String name, String nickname, String phone, String email){
+    public Users(String name, String nickname, String phone, String email){
         this.name = name;
         this.nickname = nickname;
         this.phone = phone;

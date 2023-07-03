@@ -2,7 +2,7 @@ package com.hfp.domain.support.domain;
 
 import com.hfp.domain.animal.domain.Animal;
 import com.hfp.domain.common.BaseEntity;
-import com.hfp.domain.user.domain.User;
+import com.hfp.domain.user.domain.Users;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,11 +25,11 @@ public class Support extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sponsor_id")
-    private User sponsorUser;
+    private Users sponsorUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="resque_id")
-    private User rescueUser;
+    private Users rescueUser;
 
     @Column(nullable = false)
     private Integer money;
@@ -38,7 +38,7 @@ public class Support extends BaseEntity {
     private LocalDate support_date;
 
     @Builder
-    public Support(Animal supportAnimal, User sponsorUser, User rescueUser, Integer money, LocalDate support_date) {
+    public Support(Animal supportAnimal, Users sponsorUser, Users rescueUser, Integer money, LocalDate support_date) {
         this.supportAnimal = supportAnimal;
         this.sponsorUser = sponsorUser;
         this.rescueUser = rescueUser;

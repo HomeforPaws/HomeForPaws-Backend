@@ -2,12 +2,11 @@ package com.hfp.domain.proof.domain;
 
 import com.hfp.domain.animal.domain.Animal;
 import com.hfp.domain.common.BaseEntity;
-import com.hfp.domain.user.domain.User;
+import com.hfp.domain.user.domain.Users;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Getter
@@ -23,7 +22,7 @@ public class Proof extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rescue_id")
-    private User rescueUser;
+    private Users rescueUsers;
 
     @Column(nullable = false)
     private String proof_url;
