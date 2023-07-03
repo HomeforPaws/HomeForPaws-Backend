@@ -55,4 +55,8 @@ public class Animal extends BaseEntity {
         this.account = account;
     }
 
+    public void updateImageUrl(String image_url) {
+        this.image_url = image_url;
+    }
+
 }
