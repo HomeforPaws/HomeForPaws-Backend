@@ -18,6 +18,11 @@ public class AnimalController {
 
     private final AnimalService animalService;
 
+    @GetMapping
+    public ResponseEntity<?> getAnimalBySpecies(@RequestParam(value = "species") String species) {
+        return animalService.getAnimalBySpecies(species);
+    }
+
     @GetMapping("/list")
     public ResponseEntity<?> getAnimalList() {
         return animalService.getAnimalList();

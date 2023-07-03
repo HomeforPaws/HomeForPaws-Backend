@@ -5,17 +5,25 @@ import com.hfp.domain.animal.domain.repository.AnimalRepository;
 import com.hfp.domain.support.domain.Support;
 import com.hfp.domain.support.domain.dto.PostSupportReq;
 import com.hfp.domain.support.domain.dto.PostSupportRes;
+import com.hfp.domain.support.domain.dto.response.SupportBadgeResponseDto;
+import com.hfp.domain.support.domain.dto.response.SupportListResponseDto;
 import com.hfp.domain.support.domain.repository.SupportRepository;
-import com.hfp.domain.user.domain.User;
+import com.hfp.domain.user.domain.Users;
 import com.hfp.domain.user.domain.repository.UserRepository;
+import com.hfp.global.error.DefaultException;
+import com.hfp.global.payload.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class SupportService {
     private final SupportRepository supportRepository;
     private final AnimalRepository animalRepository;
@@ -29,13 +37,13 @@ public class SupportService {
         LocalDate support_date = postSupportReq.getSupport_date();
 
         Animal animal = animalRepository.findById(animal_id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid animal ID"));
+                .orElseThrow(() -> new DefaultException(ErrorCode.INVALID_CHECK));
 
-        User sponsorUser = userRepository.findById(sponsor_id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid sponsor ID"));
+        Users sponsorUser = userRepository.findById(sponsor_id)
+                .orElseThrow(() -> new DefaultException(ErrorCode.INVALID_CHECK));
 
-        User rescueUser = userRepository.findById(rescue_id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid rescue ID"));
+        Users rescueUser = userRepository.findById(rescue_id)
+                .orElseThrow(() -> new DefaultException(ErrorCode.INVALID_CHECK));
 
         Support support = Support.builder()
                 .supportAnimal(animal)
@@ -58,4 +66,45 @@ public class SupportService {
         return postSupportRes;
     }
 
+    public SupportBadgeResponseDto getSupport(Long sponsor_id) {
+
+        Users sponsorUser = userRepository.findById(sponsor_id).orElseThrow(
+                () -> new IllegalArgumentException("해당하는 후원자 정보를 찾을 수 없습니다.")
+        );
+
+        List<Support> support_list = supportRepository.findAllBySponsorUser(sponsorUser);
+
+        System.out.println("support_list.size() = " + support_list.size());
+
+        List<SupportListResponseDto> supportListResponseDtos = support_list.stream()
+                .map(support -> SupportListResponseDto.builder()
+                        .support_id(support.getId())
+                        .support_date(support.getSupport_date())
+                        .money(support.getMoney())
+                        .animal_name(support.getSupportAnimal().getName())
+                        .animal_url(support.getSupportAnimal().getImage_url())
+                        .build())
+                .toList();
+
+        int support_num = supportListResponseDtos.size();
+        int badge_num = 0;
+        if (support_num > 0 && support_num <= 5) {
+            badge_num = 1;
+        } else if (support_num > 5 && support_num <= 10) {
+            badge_num = 2;
+        } else if (support_num > 10 && support_num <= 15) {
+            badge_num = 3;
+        } else if (support_num > 15) {
+            badge_num = 4;
+        }
+
+        System.out.println("badge_num = " + badge_num);
+
+        List<Integer> badge_list = IntStream.range(1, badge_num + 1).boxed().collect(Collectors.toList());
+
+        return SupportBadgeResponseDto.builder()
+                .badge_list(badge_list)
+                .support_list(supportListResponseDtos)
+                .build();
+    }
 }
