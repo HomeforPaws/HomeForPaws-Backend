@@ -16,7 +16,7 @@ public class ProofController {
 
     private final ProofService proofService;
 
-    @GetMapping("/{animal_id}")
+    @GetMapping("/proof/{animal_id}")
     public ResponseEntity<?> getProof(@PathVariable Long animal_id) {
 
         ProofResponseDto proofResponseDto = proofService.getProof(animal_id);
