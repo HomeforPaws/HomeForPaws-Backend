@@ -1,6 +1,7 @@
 package com.hfp.domain.animal.presentation;
 
 import com.hfp.domain.animal.application.AnimalService;
+import com.hfp.domain.animal.domain.Species;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AnimalController {
 
     private final AnimalService animalService;
+
+    @GetMapping("/{species}")
+    public ResponseEntity<?> getAnimalBySpecies(@PathVariable Species species) {
+        return animalService.getAnimalBySpecies(species);
+    }
 
     @GetMapping("/list")
     public ResponseEntity<?> getAnimalList() {
