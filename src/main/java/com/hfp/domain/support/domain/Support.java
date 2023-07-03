@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
@@ -34,5 +34,5 @@ public class Support extends BaseEntity {
     private Integer money;
 
     @Column(nullable = false)
-    private LocalDateTime support_date;
+    private LocalDate support_date;
 }
