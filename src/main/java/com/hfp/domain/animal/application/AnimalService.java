@@ -78,7 +78,7 @@ public class AnimalService {
                 .check(true)
                 .information(GetAnimalRes.builder()
                         .animal_id(animal.getId())
-                        .rescue_id(animal.getRescueUser().getId())
+                        .rescue_id(animal.getRescueUsers().getId())
                         .name(animal.getName())
                         .species(animal.getSpecies())
                         .gender(animal.getGender())
