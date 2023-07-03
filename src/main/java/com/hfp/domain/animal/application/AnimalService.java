@@ -22,8 +22,8 @@ public class AnimalService {
 
     private final AnimalRepository animalRepository;
 
-    public ResponseEntity<?> getAnimalBySpecies(Species species) {
-        Optional<Animal> findAnimals = animalRepository.findBySpecies(species);
+    public ResponseEntity<?> getAnimalBySpecies(String species) {
+        List<Animal> findAnimals = animalRepository.findAnimalBySpecies(Species.valueOf(species));
 
         List<GetAnimalRes> animalRes = findAnimals.stream()
                 .map(animal -> GetAnimalRes.builder()
