@@ -51,7 +51,16 @@ public class AnimalService {
 
         ApiResponse apiResponse = ApiResponse.builder()
                 .check(true)
-                .information(animal)
+                .information(GetAnimalRes.builder()
+                        .animal_id(animal.getId())
+                        .rescue_id(animal.getRescueUser().getId())
+                        .name(animal.getName())
+                        .species(animal.getSpecies())
+                        .gender(animal.getGender())
+                        .image_url(animal.getImage_url())
+                        .place(animal.getPlace())
+                        .age(animal.getAge())
+                        .description(animal.getDescription()))
                 .build();
 
         return ResponseEntity.ok(apiResponse);
