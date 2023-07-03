@@ -2,19 +2,15 @@ package com.hfp.domain.user.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hfp.domain.common.BaseEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +18,7 @@ import lombok.Getter;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class User extends BaseEntity {
+public class Users extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +38,7 @@ public class User extends BaseEntity {
 
 
     @Builder
-    public User(String name, String email, String password, String imageUrl){
+    public Users(String name, String email, String password, String imageUrl){
         this.email = email;
         this.name = name;
         this.imageUrl = imageUrl;
