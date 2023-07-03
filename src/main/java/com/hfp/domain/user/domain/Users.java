@@ -21,35 +21,25 @@ import lombok.Getter;
 public class Users extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "users_id")
     private Long id;
 
-    @Column(nullable = false)
     private String name;
-
-    @Email
-    @Column(nullable = false)
+    private String nickname;
+    private String phone;
     private String email;
-
-    private String imageUrl;
-
-    @JsonIgnore
-    private String password;
 
 
     @Builder
-    public Users(String name, String email, String password, String imageUrl){
+    public Users(String name, String nickname, String phone, String email){
+        this.name = name;
+        this.nickname = nickname;
+        this.phone = phone;
         this.email = email;
-        this.name = name;
-        this.imageUrl = imageUrl;
-        this.password = password;
     }
 
-    public void updateName(String name){
-        this.name = name;
+    public void updateNickname(String nickname){
+        this.nickname = nickname;
     }
 
-    public void updateImageUrl(String imageUrl){
-        this.imageUrl = imageUrl;
-    }
 }

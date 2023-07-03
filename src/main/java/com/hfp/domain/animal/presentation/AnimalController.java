@@ -25,5 +25,5 @@ public class AnimalController {
             @PathVariable("animalId") Long animalId) {
         return animalService.getAnimal(animalId);
     }
-
+  
 }
