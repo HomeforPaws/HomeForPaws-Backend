@@ -1,7 +1,7 @@
 package com.hfp.domain.animal.domain;
 
 import com.hfp.domain.common.BaseEntity;
-import com.hfp.domain.user.domain.User;
+import com.hfp.domain.user.domain.Users;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -19,7 +19,7 @@ public class Animal extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rescue_id")
-    private User rescueUser;
+    private Users rescueUsers;
 
     private String name;
 
@@ -42,8 +42,8 @@ public class Animal extends BaseEntity {
     private String account;
 
     @Builder
-    public Animal(User rescueUser, String name, Species species, Gender gender, String image_url, String place, Integer age, String description, String bank, String account) {
-        this.rescueUser = rescueUser;
+    public Animal(Users rescueUsers, String name, Species species, Gender gender, String image_url, String place, Integer age, String description, String bank, String account) {
+        this.rescueUsers = rescueUsers;
         this.name = name;
         this.species = species;
         this.gender = gender;

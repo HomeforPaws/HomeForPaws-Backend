@@ -2,7 +2,7 @@ package com.hfp.domain.support.domain;
 
 import com.hfp.domain.animal.domain.Animal;
 import com.hfp.domain.common.BaseEntity;
-import com.hfp.domain.user.domain.User;
+import com.hfp.domain.user.domain.Users;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,11 +24,11 @@ public class Support extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sponsor_id")
-    private User sponsorUser;
+    private Users sponsorUsers;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="resque_id")
-    private User resqueUser;
+    private Users resqueUsers;
 
     @Column(nullable = false)
     private Integer money;

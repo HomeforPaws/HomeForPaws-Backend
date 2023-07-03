@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +26,7 @@ public class AnimalService {
         List<GetAnimalRes> animalRes = findAnimals.stream()
                 .map(animal -> GetAnimalRes.builder()
                         .animal_id(animal.getId())
-                        .rescue_id(animal.getRescueUser().getId())
+                        .rescue_id(animal.getRescueUsers().getId())
                         .name(animal.getName())
                         .species(animal.getSpecies())
                         .gender(animal.getGender())

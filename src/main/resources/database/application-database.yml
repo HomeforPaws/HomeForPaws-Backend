@@ -1,16 +1,16 @@
 #DB 설정
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/jin_h2;NON_KEYWORDS=USER
-    username: sa
-    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://home-for-paws-mysql.cy8lwbfvwfd1.ap-northeast-2.rds.amazonaws.com:3306/home-for-paws
+    username: admin
+    password: pawpaw73
 
 #JPA 설정
   jpa:
     database-platform:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
 
 #배포 할 떄는 open-in-view false 설정
     open-in-view: false
