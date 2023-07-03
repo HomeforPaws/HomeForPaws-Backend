@@ -2,6 +2,7 @@ package com.hfp.domain.animal.application;
 
 import com.hfp.domain.animal.domain.Animal;
 import com.hfp.domain.animal.domain.repository.AnimalRepository;
+import com.hfp.domain.animal.dto.GetAnimalRes;
 import com.hfp.global.error.DefaultException;
 import com.hfp.global.payload.ApiResponse;
 import com.hfp.global.payload.ErrorCode;
@@ -21,11 +22,25 @@ public class AnimalService {
     private final AnimalRepository animalRepository;
 
     public ResponseEntity<?> getAnimalList() {
-        List<Animal> animals = animalRepository.findAll();
+        List<Animal> findAnimals = animalRepository.findAll();
+
+        List<GetAnimalRes> animalRes = findAnimals.stream()
+                .map(animal -> GetAnimalRes.builder()
+                        .animal_id(animal.getId())
+                        .rescue_id(animal.getRescueUser().getId())
+                        .name(animal.getName())
+                        .species(animal.getSpecies())
+                        .gender(animal.getGender())
+                        .image_url(animal.getImage_url())
+                        .place(animal.getPlace())
+                        .age(animal.getAge())
+                        .description(animal.getDescription())
+                        .build())
+                .toList();
 
         ApiResponse apiResponse = ApiResponse.builder()
                 .check(true)
-                .information(animals)
+                .information(animalRes)
                 .build();
         return ResponseEntity.ok(apiResponse);
     }
