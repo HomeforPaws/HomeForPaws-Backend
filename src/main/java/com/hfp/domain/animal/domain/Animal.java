@@ -16,11 +16,17 @@ public class Animal extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rescue_id")
+    private Users rescueUser;
+
     private String name;
 
-    private String species;
+    @Enumerated(EnumType.STRING)
+    private Species species;
 
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     private String image_url;
 
