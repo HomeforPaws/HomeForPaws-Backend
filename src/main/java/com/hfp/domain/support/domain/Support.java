@@ -28,7 +28,7 @@ public class Support extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="resque_id")
-    private User resqueUser;
+    private User rescueUser;
 
     @Column(nullable = false)
     private Integer money;
