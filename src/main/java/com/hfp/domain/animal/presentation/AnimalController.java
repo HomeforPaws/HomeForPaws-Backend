@@ -4,6 +4,7 @@ import com.hfp.domain.animal.application.AnimalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,4 +19,11 @@ public class AnimalController {
     public ResponseEntity<?> getAnimalList() {
         return animalService.getAnimalList();
     }
+
+    @GetMapping("/{animalId}")
+    public ResponseEntity<?> getAnimal(
+            @PathVariable("animalId") Long animalId) {
+        return animalService.getAnimal(animalId);
+    }
+  
 }
