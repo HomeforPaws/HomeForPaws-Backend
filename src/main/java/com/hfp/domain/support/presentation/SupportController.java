@@ -19,7 +19,7 @@ public class SupportController {
         return supportService.postSupport(postSupportReq);
     }
 
-    @GetMapping("/{sponsor_id}")
+    @GetMapping("/info/{sponsor_id}")
     public ResponseEntity<?> getSupport(@PathVariable Long sponsor_id) {
 
         SupportBadgeResponseDto supportBadgeResponseDto = supportService.getSupport(sponsor_id);

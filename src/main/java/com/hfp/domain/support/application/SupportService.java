@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -69,7 +68,13 @@ public class SupportService {
 
     public SupportBadgeResponseDto getSupport(Long sponsor_id) {
 
-        List<Support> support_list = supportRepository.findAllById(Collections.singleton(sponsor_id));
+        Users sponsorUser = userRepository.findById(sponsor_id).orElseThrow(
+                () -> new IllegalArgumentException("해당하는 후원자 정보를 찾을 수 없습니다.")
+        );
+
+        List<Support> support_list = supportRepository.findAllBySponsorUser(sponsorUser);
+
+        System.out.println("support_list.size() = " + support_list.size());
 
         List<SupportListResponseDto> supportListResponseDtos = support_list.stream()
                 .map(support -> SupportListResponseDto.builder()
@@ -92,6 +97,8 @@ public class SupportService {
         } else if (support_num > 15) {
             badge_num = 4;
         }
+
+        System.out.println("badge_num = " + badge_num);
 
         List<Integer> badge_list = IntStream.range(1, badge_num + 1).boxed().collect(Collectors.toList());
 

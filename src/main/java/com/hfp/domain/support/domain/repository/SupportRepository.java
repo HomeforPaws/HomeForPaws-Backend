@@ -10,5 +10,5 @@ public interface SupportRepository extends JpaRepository<Support, Long> {
 
     List<Support> findSupportBySponsorUser(Users sponsorUser);
 
-    List<Support> findAllById(Long sponsor_id);
+    List<Support> findAllBySponsorUser(Users sponsorUser);
 }
